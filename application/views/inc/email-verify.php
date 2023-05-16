@@ -5,7 +5,7 @@
 			<div class="status alert alert-warning my-3" id="status">
 				We've sent email to <?php echo $emailAddress; ?> with verifiction code. Please check your inbox.
 				<br>
-				Please note that before get new verification code chekc your spam folder.
+				Please note that before get new verification code check your spam folder.
 			</div>
 			<div class="sh">
 				<form id="verfication">

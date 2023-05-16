@@ -433,7 +433,7 @@
                                               <hr style="border: 1px solid #efefef; margin-top: 30px;">
                                               <p style="text-align: center;">Verify your email address</p>
                                               <div style="width: 100%; margin-bottom: 20px; text-align: center;">
-                                                <img src="{LockPng}" style="width: 160px; height: 150px;">
+                                                <img src="https://github.com/HarryVishmitha/hhrspace/raw/d78fe4d88cfa66ea0577ae0f7b1e90760eb45f89/assets/system/email-verification.png" style="width: 160px; height: 150px;">
                                               </div>
                                               <hr style="border: 1px solid #fff; margin-bottom: 10px;">
                                               

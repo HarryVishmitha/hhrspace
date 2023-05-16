@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="container-fluid page-item shadow-sm sticky-top">
-<header class="blog-header lh-1 py-3">
+  <header class="blog-header lh-1 py-3">
 		<div class="text-center d-lg-none d-md-none">
 			<div class="d-flex justify-content-between">
 				<a class="blog-header-logo text-body-emphasis text-decoration-none" href="<?php echo base_url() ?>"><?php echo $site_name ?></a>
@@ -36,7 +36,7 @@
 								?>
 								<div class="flex-shrink-0 dropdown">
 									<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-										<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle Dp">
+										<img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" style="width: 32px; height: 32px;">
 									</a>
 									<ul class="dropdown-menu text-small shadow">
 										<li><a class="dropdown-item" href="#">Dashboard</a></li>
@@ -48,7 +48,7 @@
 								<?php
 							} else {
 							?>
-								<a class="btn btn-sm btn-outline-secondary" href="<?php echo base_url('user/login');?>">Sign in</a>
+								<a class="btn btn-sm btn-outline-secondary" href="<?php echo base_url('user/login');?>">Sign</a>
 							<?php
 							}
 							

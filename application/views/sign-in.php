@@ -7,6 +7,11 @@
 					<div class="s w-75">
 						<div class="h1 text-center"><?php echo $site_name; ?></div>
 						<div class="h3 text-info text-center mb-3">Sign Up</div>
+						
+						<?php if (!empty($error_message)): ?>
+							<div class="alert alert-danger"><?php echo $error_message; ?></div>
+						<?php endif; ?>
+
 						<div class="status alert" id="status"></div>
 						<form action="<?php echo base_url('user/auth') ?>" method="post" id="signin">
 							<div class="form-floating mb-3">

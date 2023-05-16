@@ -83,7 +83,7 @@ class Emails extends CI_Model {
 		$mail->addAddress($Toemail);
 		 
 		// Email subject
-		$mail->Subject = 'Verify your email address for' . $siteName;
+		$mail->Subject = 'Verify your email address for ' . $siteName;
 		 
 		// Set email format to HTML
 		$mail->isHTML(true);
@@ -94,7 +94,7 @@ class Emails extends CI_Model {
 		$mailContent = str_replace('{Sitename}', $siteName, $mailContent);
 		$mailContent = str_replace('{systemEmail}', $systemEmail, $mailContent);
 		$mailContent = str_replace('{newUsername}', $userFullname, $mailContent);
-		$mailContent = str_replace('{LockPng}', $lockPNG, $mailContent);
+		// $mailContent = str_replace('{LockPng}', $lockPNG, $mailContent);
 		$mailContent = str_replace('{URL}', $URL, $mailContent);
 		$mail->Body = $mailContent;
 		 

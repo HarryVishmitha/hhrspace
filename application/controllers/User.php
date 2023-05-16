@@ -8,6 +8,7 @@ class User extends CI_Controller {
 		$this->load->database();
 		$this->load->model('Essential');
 		$this->load->library('session');
+		
 	}
 
 	public function register() {
@@ -67,6 +68,13 @@ class User extends CI_Controller {
 			}
 
 		} else {
+			$error = $this->input->get('error');
+			if ($error == 'pass') {
+				$data['error_message'] = 'Invalid password!';
+			} else {
+				$data['error_message'] = '';
+			}
+
 			$this->load->view('inc/head/head-type-2', $data);
 			$this->load->view('sign-in', $data);
 			$this->load->view('inc/footer/footer-type-2', $data);
@@ -167,6 +175,7 @@ class User extends CI_Controller {
 		$data['pages'] = $this->Essential->pages();
 		$data['page'] = "Veriy Your email address";
 		$data['emailAddress'] = $this->input->get('email');
+
 
 		$this->load->view('inc/head/head-type-1', $data);
 		$this->load->view('inc/email-verify', $data);
@@ -282,33 +291,46 @@ class User extends CI_Controller {
 			$this->db->where('email', $email);
 			$query = $this->db->get('users');
 			$result = $query->row();
-
-			if (password_verify($password, $result->password)) {
+			if ($result->verification == "verified") {
 				$this->db->where('email', $email);
-				$query12345 = $this->db->get('users');
-				$resultUser = $query12345->row();
-				if ($resultUser->type == "admin") {
-					$sessionData = array("UserId" => $resultUser->id, "loggedIn" => TRUE);
-					$this->session->set_userdata($sessionData);
-					redirect(base_url('admin/dashboard'));
+				$query = $this->db->get('users');
+				$result = $query->row();
 
-				} elseif ($resultUser->type == "author") {
-					$sessionData = array("UserId" => $resultUser->id, "loggedIn" => TRUE);
-					$this->session->set_userdata($sessionData);
-					redirect(base_url('author/dashboard'));
+				if (password_verify($password, $result->password)) {
+					$this->db->where('email', $email);
+					$query12345 = $this->db->get('users');
+					$resultUser = $query12345->row();
+					if ($resultUser->type == "admin") {
+						$sessionData = array("UserId" => $resultUser->id, "loggedIn" => TRUE);
+						$this->session->set_userdata($sessionData);
+						redirect(base_url('admin/dashboard'));
 
-				} elseif ($resultUser->type == "user") {
-					$sessionData = array("UserId" => $resultUser->id, "loggedIn" => TRUE);
-					$this->session->set_userdata($sessionData);
-					redirect(base_url('user/dashboard'));
+					} elseif ($resultUser->type == "author") {
+						$sessionData = array("UserId" => $resultUser->id, "loggedIn" => TRUE);
+						$this->session->set_userdata($sessionData);
+						redirect(base_url('author/dashboard'));
+
+					} elseif ($resultUser->type == "user") {
+						$sessionData = array("UserId" => $resultUser->id, "loggedIn" => TRUE);
+						$this->session->set_userdata($sessionData);
+						redirect(base_url('user/dashboard'));
+					}
+					
+				} else {
+					redirect('user/login?error=pass');
 				}
-				
 			} else {
-				echo "NM";
+				redirect(base_url('user/confirm?email='. $email));
 			}
 			
 		} else {
-			
+			$data['site_name'] = $this->Essential->sitename();
+			$data['favicon'] = base_url($this->Essential->favicon());
+			$data['pages'] = $this->Essential->pages();
+			$data['page'] = "Authentication Error | Must sign up";
+			$this->load->view('inc/head/head-type-1', $data);
+			$this->load->view('errors/html/error_auth', $data);
+			$this->load->view('inc/footer/footer-type-1', $data);
 		}
 		
 		
