@@ -17,6 +17,7 @@ class Home extends CI_Controller {
 		$data['favicon'] = base_url($this->Essential->favicon());
 		$data['pages'] = $this->Essential->pages();
 		$data['page'] = "Home";
+		$data['userData'] = $this->Essential->userdata();
 		
 		
 
@@ -29,4 +30,27 @@ class Home extends CI_Controller {
 		echo 'hi';
 
 	}
+	public function test() {
+		$this->load->view('test');
+	}
+	public function create_payment() {
+		$data['clientID'] = $this->Essential->PaypalCId();
+		$this->load->view('payment', $data);
+	}
+	public function upload_file() {
+		$config['upload_path'] = './assets/premium_contents/'; // Specify your upload directory
+		$config['allowed_types'] = '*';
+		$this->load->library('upload', $config);
+	
+		if ($this->upload->do_upload('userfile')) {
+		  // File uploaded successfully
+		  // Additional processing if needed
+		  $response = 'File uploaded successfully.';
+		} else {
+		  // File upload failed
+		  $response = 'Error uploading file: ' . $this->upload->display_errors();
+		}
+	
+		echo $response;
+	  }
 }

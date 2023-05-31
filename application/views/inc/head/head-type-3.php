@@ -14,7 +14,11 @@
 	<!-- Google icons-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<!-- Summernote -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.js"></script>
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/stylesheetA.css') ?>">
 </head>
 <body>
@@ -37,9 +41,10 @@
 
         <div class="flex-shrink-0 dropdown">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle Dp">
+            <img src="<?php echo base_url('assets/uploads/'. $userData->dp) ?>" alt="mdo" width="32" height="32" class="rounded-circle Dp">
           </a>
           <ul class="dropdown-menu text-small shadow">
+					<li><a class="dropdown-item" href="<?php if ($userData->type == "admin") {echo base_url('admin/dashboard');} elseif ($userData->type == "author") {echo base_url('author/dashboard');} elseif ($userData->type == "user") {echo base_url('member/dashboard');}?>">Dashboard</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><hr class="dropdown-divider"></li>

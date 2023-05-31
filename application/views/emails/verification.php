@@ -50,7 +50,7 @@
         h1 {
           margin-top: 0;
           color: #333333;
-          font-size: 22px;
+          font-size: 35px;
           font-weight: bold;
           text-align: left;
         }

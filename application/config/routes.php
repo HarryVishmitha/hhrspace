@@ -55,5 +55,7 @@ $route['subscribe'] = 'subscribe';
 $route['p/(:any)'] = 'pages/page/$1';
 $route['user'] = 'user';
 $route['home/terms-conditions'] = 'home/termsconditions';
+$route['member'] = 'member';
+$route['upload'] = 'upload';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -16,6 +16,7 @@ class Subscribe extends CI_Controller {
 		$data['favicon'] = base_url($this->Essential->favicon());
 		$data['pages'] = $this->Essential->pages();
 		$data['page'] = "Subscribe us";
+		$data['userData'] = $this->Essential->userdata();
 
 		if ($this->input->get('email')) {
 			$data['email'] = $this->input->get('email');

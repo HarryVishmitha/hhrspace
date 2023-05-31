@@ -32,7 +32,7 @@ class User extends CI_Controller {
 
 			} elseif ($row->type == "user") {
 				
-				redirect(base_url('user/dashboard'));
+				redirect(base_url('member/dashboard'));
 			}
 
 		} else {
@@ -64,7 +64,7 @@ class User extends CI_Controller {
 
 			} elseif ($row->type == "user") {
 				
-				redirect(base_url('user/dashboard'));
+				redirect(base_url('member/dashboard'));
 			}
 
 		} else {
@@ -104,6 +104,7 @@ class User extends CI_Controller {
 				echo "<script>$('#email').addClass('is-invalid');$('#email-error').html('Email already exists.');$('#status').addClass('alert-danger');$('#status').html('This email already exists! <a href=\"". base_url('user/login') ."\" class=\"text-decoration-none\">Sign in</a>');</script>";
 			}
 		} else {
+			$this->load->model('Site_settings');
 			//check passwords
 			if (password_verify($conP, $newP)) {
 				$new_user = array(
@@ -113,7 +114,7 @@ class User extends CI_Controller {
 					"password" => $newP,
 					"verification" => "Not-verified",
 					"type" => "user",
-					"dp" => "user.png"
+					"dp" => $this->Site_settings->Cuserphoto()
 				);
 				if ($this->db->insert('users', $new_user)) {
 
@@ -313,7 +314,7 @@ class User extends CI_Controller {
 					} elseif ($resultUser->type == "user") {
 						$sessionData = array("UserId" => $resultUser->id, "loggedIn" => TRUE);
 						$this->session->set_userdata($sessionData);
-						redirect(base_url('user/dashboard'));
+						redirect(base_url('member/dashboard'));
 					}
 					
 				} else {
@@ -342,16 +343,6 @@ class User extends CI_Controller {
 		$this->session->sess_destroy();
 		$this->session->unset_userdata('loggedIn');
 		redirect(base_url('home'));
-	}
-
-	public function dashboard() {
-
-		if ($this->session->userdata('loggedIn')) {
-			echo "User Dashboard" . $this->session->userdata('UserId');
-		} else {
-			redirect(base_url('user/login'));
-		}
-		
 	}
 
 }
