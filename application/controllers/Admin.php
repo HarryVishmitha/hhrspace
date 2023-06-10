@@ -440,5 +440,26 @@ class Admin extends CI_Controller {
 			redirect(base_url('user/login'));
 		}
 	}
+	public function premium_upload() {
+		if ($this->session->userdata('loggedIn')) {
+			$this->load->model('Premium_content');
+			$config['upload_path'] = './assets/premium_contents/';
+			$config['allowed_types'] = '*';
+			$config['file_name'] = $this->Premium_content->pc_id_generator();
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('pc_file')) {
+				// File uploaded successfully
+				$uploadedData = $this->upload->data();
+				$fileUrl = base_url('assets/premium_contents/' . $uploadedData['file_name']);
+				$response = "<script>$('#f_url').attr('value', '". $fileUrl ."' );$('#upload_status').removeClass('alert-danger');$('#upload_status').addClass('alert alert-success');$('#upload_status').html('Successfully uploaded.')</script>";
+			} else {
+				// File upload failed
+				$response = "<script>$('#upload_status').removeClass('alert-success');$('#upload_status').addClass('alert alert-danger');$('#upload_status').html('<strong>Sorry!</strong>". $this->upload->display_errors() ."')</script>";
+			}
+			echo $response; 
+		} else {
+			redirect(base_url('user/login'));
+		}
+	}
 
 }

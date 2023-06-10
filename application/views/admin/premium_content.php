@@ -94,9 +94,10 @@
 	$(document).ready(function () {
 		$("#button-addon2").click(function (e) { 
 			e.preventDefault();
-			var formData = new FormData($("#pc_file")[0]);
+			var formData = new FormData();
+			formData.append('pc_file', $('#pc_file')[0].files[0]);
 			$.ajax({
-				url: 'your_upload_url', // Replace with your CodeIgniter upload URL
+				url: '<?php echo base_url('admin/premium_upload') ?>', // Replace with your CodeIgniter upload URL
 				type: 'POST',
 				data: formData,
 				processData: false,
@@ -112,6 +113,7 @@
 					return xhr;
 				},
 				success: function(response) {
+					console.log('ajax success');
 					$("#upload_status").html(response);
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
@@ -123,8 +125,6 @@
 					console.log(errorThrown);
 				}
 			});
-			var file = $("#pc_file").val();
-			$("#f_url").attr("value", file );
 		});
 		$("#model_cLose").click(function (e) { 
 			$("#uploadPremium_content")[0].reset();
