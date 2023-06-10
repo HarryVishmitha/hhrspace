@@ -2,7 +2,7 @@
     
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    
+    #[\AllowDynamicProperties]
     class PHPMailer_Lib
     {
     	public function __construct(){

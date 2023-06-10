@@ -5,7 +5,7 @@ require_once APPPATH.'libraries/autoload.php';
 
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
-
+#[\AllowDynamicProperties]
 class Paypal_lib {
 
     protected $apiContext;

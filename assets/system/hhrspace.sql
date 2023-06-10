@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `application` (
   `a_name` varchar(255) NOT NULL,
   `a_value` varchar(255) NOT NULL,
   PRIMARY KEY (`a_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `application`
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `email_messages` (
   `sent_user_id` int NOT NULL,
   `sent_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`system_email-id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT=17;
 
 --
 -- Dumping data for table `email_messages`
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `page_url` varchar(255) NOT NULL,
   `page_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`page_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT=5;
 
 --
 -- Dumping data for table `pages`
@@ -131,10 +131,10 @@ INSERT INTO `pages` (`page_id`, `page_name`, `page_url`, `page_added`) VALUES
 DROP TABLE IF EXISTS `photos`;
 CREATE TABLE IF NOT EXISTS `photos` (
   `photo_id` int NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `url` varchar(255) NOT NULL,
   `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`photo_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT=10;
 
 --
 -- Dumping data for table `photos`
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `polls` (
   `sent_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `sent_by` int NOT NULL,
   PRIMARY KEY (`poll_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT=6;
 
 --
 -- Dumping data for table `polls`
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `premium_content` (
   `added_by_user` int NOT NULL,
   `review` int NOT NULL,
   PRIMARY KEY (`pc_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 -- --------------------------------------------------------
 
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `subscribers` (
   `email` varchar(255) NOT NULL,
   `subscribed_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`subscriber-id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `subscribers`
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `telegram_messages` (
   `system_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `added_user_id` varchar(255) NOT NULL,
   PRIMARY KEY (`system-msg-id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT=28;
 
 --
 -- Dumping data for table `telegram_messages`
@@ -273,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `dp` varchar(255) NOT NULL,
   `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT=17;
 
 --
 -- Dumping data for table `users`
@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `verifications` (
   `used` int NOT NULL,
   `addeed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`verify_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT=5;
 
 --
 -- Dumping data for table `verifications`
