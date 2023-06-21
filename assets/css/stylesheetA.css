@@ -219,3 +219,53 @@ li.nav-item {
     border-radius: 35px !important;
     padding: 3px;
 }
+.nothing {
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 20px;
+	text-align: center;
+	animation: fade-in 0.5s ease-in-out;
+}
+  
+.nothing .h3 {
+	color: #555;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+  
+.nothing p {
+	color: #777;
+	font-size: 16px;
+}
+  
+@keyframes fade-in {
+	0% {
+	  opacity: 0;
+	  transform: translateY(-10px);
+	}
+	100% {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+}
+.deleted-row {
+	animation: fadeOut 1s ease-in-out;
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		display: none;
+	}
+}
+#notification {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}

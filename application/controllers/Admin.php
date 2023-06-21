@@ -421,7 +421,7 @@ class Admin extends CI_Controller {
 			$limit = 10;
 			$offset = ($page - 1) * $limit;
 			$total_rows = $this->Essential->pctotalrows();
-			$data['messages'] = $this->Essential->premium_content($limit, $offset);
+			$data['rows'] = $this->Essential->premium_content($limit, $offset);
 			$data['total_pages'] = ceil($total_rows / $limit);
 			$this->load->model('Premium_content');
 			if ($this->Essential->userdata()->type == "admin") {
@@ -445,7 +445,7 @@ class Admin extends CI_Controller {
 			$this->load->model('Premium_content');
 			$config['upload_path'] = './assets/premium_contents/';
 			$config['allowed_types'] = '*';
-			$config['file_name'] = $this->Premium_content->pc_id_generator();
+			$config['encrypt_name'] = TRUE;
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('pc_file')) {
 				// File uploaded successfully
@@ -459,6 +459,58 @@ class Admin extends CI_Controller {
 			echo $response; 
 		} else {
 			redirect(base_url('user/login'));
+		}
+	}
+	public function add_pc() {
+		if ($this->session->userdata('loggedIn')) {
+			$this->load->model('Premium_content');
+			$fileName = $this->input->post('f_name');
+			$file_url = $this->input->post('f_url');
+			$price = $this->input->post('f_price');
+			$extension = pathinfo($file_url, PATHINFO_EXTENSION);
+			$extension = strtolower($extension);
+			$f_description = $this->input->post('f_description');
+			if ($f_description == "") {
+				$f_description = "none";
+			}
+			$fileId = $this->Premium_content->pc_id_generator();
+			$add_pc_file = array(
+				"pc_id" => $fileId,
+				"file_name" => $fileName,
+				"file_type" => $extension,
+				"file_url" => $file_url,
+				"price" =>$price,
+				"file_description" => $f_description,
+				"added_by_user" => $this->session->userdata('UserId'),
+				"review" => "1"
+			);
+			$add_newPC = $this->Premium_content->add_pcFile($add_pc_file);
+			if ($add_newPC == "success") {
+				echo "<script>$('#pc_status').addClass('alert alert-success');$('#pc_status').removeClass('alert-danger');$('#pc_status').html('Success');location.reload();</script>";
+			} else {
+				echo "<script>$('#pc_status').removeClass('alert-success');$('#pc_status').addClass('alert alert-danger');$('#pc_status').html('<strong>Sorry!</strong>Something gone wrong!')</script>";
+			}
+		} else {
+			redirect(base_url('user/login'));
+		}
+	}
+	public function edit_Pc() {
+
+		if ($this->session->userdata('loggedIn')) {
+			$this->load->model('Premium_content');
+			$pcId = $this->input->post('pcId');
+			echo $this->Premium_content->geteditablepc($pcId);
+		} else {
+			redirect(base_url('user/login'));
+		}
+	}
+	public function delete_Pc_item() {
+		$pcId = $this->input->post('pcId');
+		$this->db->where('pc_id', $pcId);
+		if($this->db->delete('premium_content')) {
+			echo "<script>$('#notification').addClass('alert-success');$('#notification').removeClass('alert-danger');$('#notification').html('Successfully deleted!');</script>";
+		} else {
+			echo "<script>$('#notification').addClass('alert-danger');$('#notification').removeClass('alert-succes');$('#notification').html('Something went wrong!');</script>";
 		}
 	}
 

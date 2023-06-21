@@ -12,7 +12,6 @@ class Home extends CI_Controller {
 	}
 
 	public function index() {
-
 		$data['site_name'] = $this->Essential->sitename();
 		$data['favicon'] = base_url($this->Essential->favicon());
 		$data['pages'] = $this->Essential->pages();
