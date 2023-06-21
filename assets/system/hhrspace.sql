@@ -45,7 +45,7 @@ INSERT INTO `application` (`a_id`, `a_name`, `a_value`) VALUES
 (3, 'smtp_host', 'smtp.gmail.com'),
 (4, 'smtp_auth', 'true'),
 (5, 'smtp_user', 'thejanvishmitha3@gmail.com'),
-(6, 'smtp_password', 'goebeykjglkizeaq'),
+(6, 'smtp_password', 'fgoebeykjglkizeaq1'),
 (7, 'smtp_secure', 'tls'),
 (8, 'smtp_port', '587'),
 (9, 'system-email', 'thejanvishmitha3@gmail.com'),
@@ -54,7 +54,7 @@ INSERT INTO `application` (`a_id`, `a_name`, `a_value`) VALUES
 (12, 'address', 'No.264/B/2,Batuwatt, Ragama, Sri Lanka'),
 (13, 'post_thumbnail', 'assets/system/no-thumbnail.jpg'),
 (14, 'Cuserphoto', '29ff43dc4917d06e6be87c333d4c4e51.jpg'),
-(15, 'telegramApi', '6241741673:AAF0Dxy1M5omTMpfzqJTc1NlGSdCuQqLBSk'),
+(15, 'telegramApi', '1236241741673:AAF0Dxy1M5omTMpfzqJTc1NlGSdCuQqLBSk1fd3'),
 (16, 'telegram_ChatId', '@hhrspace'),
 (17, 'PClient_ID', 'Acmh3KZMzUPKt05VR0Mc7wpIKZyJ_7byR1YKQVemCmd4SE8I8LiRKCqkN_JHrDpxMuoBGtQoESF6cJbA');
 
