@@ -513,5 +513,18 @@ class Admin extends CI_Controller {
 			echo "<script>$('#notification').addClass('alert-danger');$('#notification').removeClass('alert-succes');$('#notification').html('Something went wrong!');</script>";
 		}
 	}
+	public function edit_pc_item() {
+		$this->load->model('Premium_content');
+		$fileId = $this->input->post("fileid");
+		$file_name = $this->input->post("file_name");
+		$price = $this->input->post('priceE');
+		$file_description = addslashes($this->input->post("file_description"));
+		$update_item = array(
+			"file_name" => $file_name,
+			"price" => $price,
+			"file_description" => $file_description
+		);
+		echo $this->Premium_content->editing_pc_item($fileId, $update_item);
+	}
 
 }

@@ -46,6 +46,18 @@ img {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.clamp-5 {
+	display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .Dp {
 	height: 32px;
 	width: 32px;

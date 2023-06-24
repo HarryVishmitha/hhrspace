@@ -39,11 +39,11 @@ class Premium_content extends CI_Model {
 			$file_name = $result->file_name;
 			$file_url = $result->file_url;
 			$price = $result->price;
-			$file_description = $result->file_description;
+			$file_description = stripslashes($result->file_description);
 			$content = '<form id="update_pc_item">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control" id="fileId" placeholder="xxxxxxxxx" value="'. $pcId .'" disabled>
-								<input type="text" name="fileId" value="' . $pcId . '" hidden>
+								<input type="text" name="fileid" value="' . $pcId . '" hidden>
 								<label for="fileId">ID</label>
 							</div>
 							<div class="form-floating mb-3">
@@ -55,17 +55,68 @@ class Premium_content extends CI_Model {
 								<label for="file_url">File url</label>
 							</div>
 							<div class="form-floating mb-3">
-								<input type="number" class="form-control" id="price" placeholder="xxxxxxxxx" value="'. $price .'" name="price">
+								<input type="number" class="form-control" id="fgpriceE" placeholder="xxxxxxxxx" value="'. $price .'" name="priceE">
 								<label for="price">Price</label>
 							</div>
 							<div class="mb-3">
 								<div class="form-floating">
-									<textarea type="text" class="form-control" id="file_description" placeholder="100" name="file_description" style="height: 100px" value="'. $file_description .'">'. $file_description .'</textarea>
+									<textarea type="text" class="form-control" id="file_description" placeholder="100" name="file_description" style="height: 200px;" value="'. $file_description .'">'. $file_description .'</textarea>
 									<label for="file_description">Description (optional)</label>
 								</div>
 							</div>
 							<input type="submit" value="Save changes" class="btn btn-outline-primary">
-						</form>';
+						</form>
+						<script>
+						$(document).ready(function () {
+							$("#update_pc_item").submit(function (e) { 
+								e.preventDefault();
+								var file_name = $("#file_name").val();
+								var price = $("#fgpriceE").val();
+								var file_description = $("#file_description").val();
+								console.log(file_name);
+								console.log(price);
+								console.log(file_description);
+								if (file_name == "" || price == "" || file_description == "") {
+									if (file_name == "") {
+										$("#file_name").addClass("is-invalid");
+									} else {
+										$("#file_name").removeClass("is-invalid");
+									}
+									if (price == "") {
+										$("#price").addClass("is-invalid");
+									} else {
+										$("#price").removeClass("is-invalid");
+									}
+									if (file_description == "") {
+										$("#file_description").addClass("is-invalid");
+									} else {
+										$("#file_description").removeClass("is-invalid");
+									}
+								} else {
+									$("#file_name").removeClass("is-invalid");
+									$("#price").removeClass("is-invalid");
+									$("#file_description").removeClass("is-invalid");
+									var formData = $("#update_pc_item").serialize();
+									$.ajax({
+										url: "'.base_url('admin/edit_pc_item') .'",
+										type: "POST",
+										data: formData,
+										dataType: "html",
+										success: function(response) {
+											console.log("Ajax success");
+											$("#something").append(response);
+											show_notification();
+										},
+										error: function(jqXHR, textStatus, errorThrown) {
+											console.log("Error: " + jqXHR);
+											console.log("Error: " + textStatus);
+											console.log("Error: " + errorThrown);
+										}
+									});
+								}
+							});
+						});
+						</script>';
 		} else {
 			$content = '<!-- Nothing -->
 			<div class="nothing" id="nothing">
@@ -76,5 +127,13 @@ class Premium_content extends CI_Model {
 		}
 		return $content;
 	}
-	
+	public function editing_pc_item($fileId, $update_item) {
+		$this->db->where("pc_id", $fileId);
+		if ($this->db->update("premium_content", $update_item)) {
+			$res = "<script>$('#notification').addClass('alert-success');$('#notification').removeClass('alert-danger');$('#notification').html('Successfully updated!');console.log('suc');location.reload()</script>";
+		} else {
+			$res = "<script>$('#notification').addClass('alert-danger');$('#notification').removeClass('alert-succes');$('#notification').html('Something went wrong!');console.log('error');</script>";
+		}
+		return $res;
+	}
 }

@@ -111,7 +111,7 @@
 							<td><?php echo $message->file_name; ?></td>
 							<td><?php echo $message->file_type; ?></td>
 							<td><?php echo $message->price; ?></td>
-							<td><?php echo $message->file_description; ?></td>
+							<td><div class="clamp-5"><?php echo stripslashes($message->file_description); ?></div></td>
 							<td class="d-flex align-items-center"><button class="btn btn-secondary me-1" type="button" data-bs-toggle="modal" data-bs-target="#updatePc" onclick="updatePC('<?php echo $message->pc_id; ?>')"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger ms-1 delete-button" data-pc-id="<?php echo $message->pc_id; ?>"><i class="fas fa-trash-alt"></i></button></td>
 						</tr>
 					<?php endforeach; ?>
@@ -347,8 +347,6 @@
 			});
         });
     });
-	function show_notification() {
-		$('#notification').fadeIn().delay(2000).fadeOut();
-	}
+	
 </script>
 

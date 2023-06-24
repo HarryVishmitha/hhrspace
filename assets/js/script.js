@@ -50,4 +50,6 @@ const img = document.getElementById('myImage');
 img.addEventListener('click', function() {
   getImageSrc(this);
 });
-
+function show_notification() {
+	$('#notification').fadeIn().delay(2000).fadeOut();
+}
