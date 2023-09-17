@@ -17,7 +17,6 @@ class Admin extends CI_Controller {
 		$data['site_name'] = $this->Essential->sitename();
 		$data['favicon'] = base_url($this->Essential->favicon());
 		$data['pages'] = $this->Essential->pages();
-		
 		$data['userData'] = $this->Essential->userdata();
 
 		if ($this->session->userdata('loggedIn')) {
@@ -526,5 +525,107 @@ class Admin extends CI_Controller {
 		);
 		echo $this->Premium_content->editing_pc_item($fileId, $update_item);
 	}
+	public function add_user() {
+		$data['site_name'] = $this->Essential->sitename();
+		$data['favicon'] = base_url($this->Essential->favicon());
+		$data['pages'] = $this->Essential->pages();
+		
+		$data['userData'] = $this->Essential->userdata();
 
+		if ($this->session->userdata('loggedIn')) { 
+			if ($this->Essential->userdata()->type == "admin") {
+				$data['page'] = "Admin Dashboard";
+				$this->load->view('inc/head/head-type-3', $data);
+				$this->load->view('inc/dashboard-nav', $data);
+				$this->load->view('admin/add_user', $data);
+				$this->load->view('inc/footer/footer-type-2', $data);
+			} else {
+				$data['page'] = "401";
+				$this->load->view('inc/head/head-type-1', $data);
+				$this->load->view('errors/html/error_401', $data);
+				$this->load->view('inc/footer/footer-type-1', $data);
+			}
+		} else {
+			redirect(base_url('user/login'));
+		}
+	}
+	public function get_users() {
+		if ($this->session->userdata('loggedIn')) { 
+			$checkingFor = $this->input->get('q');
+			$this->load->model('Users');
+			$users = $this->Users->get_Ausers();
+			$userEmails = array();
+			foreach ($users as $user) {
+				$userData = array(
+					'id' => $user->id,
+					'email' => $user->email,
+					'name' => $user->first_name . " " . $user->last_name,
+					'type' => $user->type
+				);
+				$userEmails[] = $userData;
+			}
+			$hint = "";
+			foreach ($userEmails as $usersE) {
+				if (strpos($usersE['email'], $checkingFor) !== false) {
+					$hint .= '<div class="card mb-2"><div class="card-body"><div class="UN position-relative"><a class="text-info position-relative text-decoration-none" href="'. base_url('admin/users-view/'. $usersE['id']).'">'. $usersE['name'].'</a><span class="badge position-absolute ms-2';
+					if ($usersE['type'] == 'admin') {
+						$hint .= ' bg-success';
+					}elseif ($usersE['type']=="author") {
+						$hint .= ' bg-warning';
+					} elseif ($usersE['type'] == 'user') {
+						$hint .= ' bg-info';
+					}
+					$hint .= '">';
+					if ($usersE['type'] == 'admin') {
+						$hint .= 'Admin';
+					}elseif ($usersE['type']=="author") {
+						$hint .= 'Author';
+					} elseif ($usersE['type'] == 'user') {
+						$hint .= 'Member';
+					}
+					$hint .='</span></div><div class="UE">'. $usersE['email'].'</div></div></div>';
+
+				}
+			}
+			if ($hint=="") {
+				$response="no suggestion";
+			} else {
+				$response=$hint;
+			}
+			echo $response;
+		} else {
+			redirect(base_url('user/login'));
+		}
+	}
+	public function users_view($Uid) {
+		$data['site_name'] = $this->Essential->sitename();
+		$data['favicon'] = base_url($this->Essential->favicon());
+		$data['pages'] = $this->Essential->pages();
+		$data['userData'] = $this->Essential->userdata();
+
+		if ($this->session->userdata('loggedIn')) { 
+
+			if ($this->Essential->userdata()->type == "admin") {
+
+				$this->db->where('id', $Uid);
+				$query = $this->db->get('users');
+				$result = $query->row();
+				$data['userD'] = $result;
+
+				$data['page'] = "Admin Dashboard";
+				$this->load->view('inc/head/head-type-3', $data);
+				$this->load->view('inc/dashboard-nav', $data);
+				$this->load->view('admin/viewU', $data);
+				$this->load->view('inc/footer/footer-type-2', $data);
+			} else {
+				$data['page'] = "401";
+				$this->load->view('inc/head/head-type-1', $data);
+				$this->load->view('errors/html/error_401', $data);
+				$this->load->view('inc/footer/footer-type-1', $data);
+			}
+
+		} else {
+			redirect(base_url('user/login'));
+		}
+	}
 }

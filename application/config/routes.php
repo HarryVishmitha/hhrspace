@@ -57,5 +57,6 @@ $route['user'] = 'user';
 $route['home/terms-conditions'] = 'home/termsconditions';
 $route['member'] = 'member';
 $route['upload'] = 'upload';
+$route['admin/users-view/(:any)'] = 'admin/users_view/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

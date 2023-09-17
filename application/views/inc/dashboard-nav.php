@@ -1,4 +1,4 @@
-<div class="navigations mt-3">
+<div class="navigations mt-3 d-none d-md-block d-lg-block d-xl-block d-xxl-block">
 	<div class="d-flex justify-content-center">
 		<div class="page-item shadow-sm sidebar w-100">
 			<div class="nav-background">

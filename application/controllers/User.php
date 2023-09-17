@@ -112,7 +112,7 @@ class User extends CI_Controller {
 					"last_name" => $lastName,
 					"email" => $email,
 					"password" => $newP,
-					"verification" => "Not-verified",
+					"verification" => "Not verified",
 					"type" => "user",
 					"dp" => $this->Site_settings->Cuserphoto()
 				);
